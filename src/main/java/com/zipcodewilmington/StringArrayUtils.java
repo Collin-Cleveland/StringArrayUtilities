@@ -1,5 +1,6 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -94,7 +95,18 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        String alpha = "abcdefghijklmnopqrstuvwxyz";
+       String alpha = "abcdefghijklmnopqrstuvwxyz";
+       String joinArr = Arrays.toString(array).toLowerCase();
+
+       for (int i = 0; i < alpha.length(); i++){
+           if (!joinArr.contains(String.valueOf(alpha.charAt(i)))) {
+               return false;
+           }
+       }
+
+
+
+        /* String alpha = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder sb = new StringBuilder();
 
         for (String s : array) {
@@ -106,7 +118,7 @@ public class StringArrayUtils {
                     return false;
                 }
             }
-        }
+        }*/
         return true;
     }
 
@@ -148,7 +160,17 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        ArrayList<String> aR = new ArrayList<>();
+        String[] result = new String[aR.size()];
+
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] != array[i + 1]) {
+                aR.add(array[i]);
+            }
+        }
+        aR.add(array[array.length - 1]);
+        result = aR.toArray(result);
+        return result;
     }
 
     /**
@@ -156,7 +178,19 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        String joinArr = String.join("", array);
+        String str = String.valueOf(joinArr.charAt(0));
+
+        for (int i = 1; i < joinArr.length(); i++){
+            if (joinArr.charAt(i) == joinArr.charAt(i - 1)) {
+                str = str + String.valueOf(joinArr.charAt(i));
+            } else {
+                str = str + " " + String.valueOf(joinArr.charAt(i));
+            }
+        }
+        String[] packed = str.split(" ");
+
+        return packed;
     }
 
 
